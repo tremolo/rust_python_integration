@@ -21,20 +21,27 @@ Usage:
 
 Use
 
-$ make 
-# to make the library and the test program
+`$ make 
+`
 
-$ make lib
-# to only make the library
+to make the library and the test program
 
-$ make test
-# to make the test program
+`$ make lib`
 
-$ make memcheck
-# to run the test program with valgrind and check for memory errors
+to only make the library
+
+`$ make test`
+
+to make the test program
+
+`$ make memcheck`
+
+to run the test program with valgrind and check for memory errors
 
 Finally run 
-$ python load_libpoint.py 
+
+`$ python load_libpoint.py `
+
 to use it
 
 ----------
