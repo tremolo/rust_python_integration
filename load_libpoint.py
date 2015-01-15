@@ -18,9 +18,9 @@ ffi.cdef ("""
     """)
 
 if sys.platform == "darwin":
-    libname = "libpoints.dylib"
+    libname = "./libpoints.dylib"
 else:
-    libname = "libpoints.so"
+    libname = "./libpoints.so"
 
 lib = ffi.dlopen(libname)
 
