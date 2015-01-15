@@ -1,13 +1,29 @@
-all: lib test
+.PHONY: all lib test memcheck clean
 
-lib:
-	rustc points.rs 
+OS := $(shell uname)
 
-test:
-	gcc -o test test.c 
+ifeq ($(OS),Darwin)
+    LIB = libpoints.dylib
+else
+    LIB = libpoints.so
+endif
 
-memcheck:
-	valgrind --tool=memcheck  --leak-check=full  ./test
+all: $(LIB) test
+
+lib: $(LIB)
+
+$(LIB): points.rs
+	rustc points.rs
+
+ctest: test.c $(LIB)
+	gcc -o ctest test.c -g -ldl
+
+test: $(LIB) ctest
+	./ctest
+	python load_libpoint.py
+
+memcheck: ctest
+	valgrind --tool=memcheck --leak-check=full ./ctest
 
 clean:
-	rm  -f libpoints.dylib libpoints.so test
+	rm -f $(LIB) ctest
